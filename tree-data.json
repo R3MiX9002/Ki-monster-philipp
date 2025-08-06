@@ -1,0 +1,12 @@
+{
+  "text": "Start",
+  "children": [
+    {
+      "text": "Benutzereingabe?",
+      "children": [
+        { "text": "Ja", "children": [{ "text": "Wortparameter eingeben" }] },
+        { "text": "Nein", "children": [{ "text": "Beenden" }] }
+      ]
+    }
+  ]
+}

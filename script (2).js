@@ -1,0 +1,1 @@
+function sendMessage(){console.log('send');}

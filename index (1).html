@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>KI Chatbot mit Denkbaum</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 KI Chatbot mit Denkbaum</h1>
+    <div class="chat-box">
+      <div id="messages" class="messages"></div>
+      <input type="text" id="userInput" placeholder="Frage eingeben..." />
+      <button onclick="sendMessage()">Senden</button>
+    </div>
+    <div class="tree-box">
+      <h2>Denkbaum</h2>
+      <svg id="tree"></svg>
+    </div>
+  </div>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="tree-visualizer.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "ki-monster-philipp",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "openai": "^4.25.0"
+  }
+}
