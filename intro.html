@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>App Splashscreen</title>
+  <style>
+    body { background: #0d0d0d; margin: 0; height: 100vh; overflow: hidden;
+           display: flex; justify-content: center; align-items: center;
+           font-family: 'Permanent Marker', cursive, sans-serif;
+           transition: opacity 1s ease-in-out; position: relative; }
+    #particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    svg.oval { width: 400px; height: 200px; transform: scale(0.9);
+               animation: zoomIn 2s ease-in-out forwards; position: relative; z-index: 1; }
+    svg.oval path { stroke: #fff; stroke-width: 6; fill: none; stroke-dasharray: 1000;
+                    stroke-dashoffset: 1000; animation: drawOval 2s forwards ease-in-out;
+                    filter: drop-shadow(0 0 8px #00ffcc); }
+    @keyframes drawOval { to { stroke-dashoffset: 0; } }
+    @keyframes zoomIn { to { transform: scale(1); } }
+    h1.graffiti { position: absolute; font-size: 2.5rem; color: #fff; opacity: 0;
+                  animation: fadeIn 0.8s 2s forwards; text-shadow: 0 0 12px #00ffcc; z-index: 1; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); }
+                        to { opacity: 1; transform: translateY(0); } }
+    p.subtitle { position: absolute; margin-top: 3rem; font-family: monospace; color: #fff;
+                 white-space: nowrap; overflow: hidden;
+                 border-right: 2px solid rgba(255,255,255,0.75); width: 0;
+                 animation: type 3s 3s steps(25) forwards, blink 0.75s infinite step-end alternate;
+                 text-shadow: 0 0 8px #00ffcc; z-index: 1; }
+    @keyframes type { to { width: 21ch; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+  </style>
+  <link rel="preload" href="home.html" as="document">
+  <link rel="preload" href="sounds/intro.mp3" as="audio">
+</head>
+<body>
+
+  <canvas id="particles"></canvas>
+
+  <svg class="oval" viewBox="0 0 400 200">
+    <path d="M 50,100
+             C 50,30 350,30 350,100
+             C 350,170 50,170 50,100 Z" />
+  </svg>
+
+  <h1 class="graffiti">TvH</h1>
+  <p class="subtitle">Est. 2025</p>
+
+  <audio id="introSound" src="sounds/intro.mp3" preload="auto"></audio>
+
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particlesArray;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = '#00ffcc';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      for (let i = 0; i < 100; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+
+    initParticles();
+    animateParticles();
+
+    setTimeout(() => {
+      document.getElementById('introSound').play().catch(e => console.log("Audio blockiert:", e));
+    }, 2000);
+
+    setTimeout(() => {
+      document.body.style.opacity = 0;
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 1000);
+    }, 5000);
+  </script>
+
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=home.html">
+  </noscript>
+</body>
+</html>
