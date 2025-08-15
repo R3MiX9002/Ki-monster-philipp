@@ -1,4 +1,4 @@
-     /chatbot-project
+erstelle     /chatbot-project
 │
 ├── app/                # Python-Quellcode
 ├── tests/              # Unit-Tests
