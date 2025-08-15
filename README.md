@@ -801,4 +801,4 @@ chmod +x scripts/create-all-assets.sh
 echo "📱 Creating Progressive Web App manifest..."
 cat > manifest.json << 'EOF'
 {
-  "name": "Ki-Monster-
+  "name": "Ki-Monster-Philipp
