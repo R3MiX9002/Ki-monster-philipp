@@ -1,25 +1,88 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>KI Chatbot mit Denkbaum</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TvH 3D Showroom & Konverter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f8f8;
+    }
+    header {
+      background: #111;
+      color: white;
+      padding: 1rem;
+    }
+    nav {
+      background: #222;
+      padding: 1rem;
+      color: white;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+    .container {
+      padding: 2rem;
+    }
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+    .uploader {
+      margin: 2rem 0;
+    }
+    input[type="file"] {
+      display: block;
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>TvH – 3D Showroom & Konverter</h1>
+    <p>Est. 2025 Brands Potsdam</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Startseite</a>
+    <a href="#konverter">Konverter</a>
+    <a href="#showroom">Showroom</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+
   <div class="container">
-    <h1>🧠 KI Chatbot mit Denkbaum</h1>
-    <div class="chat-box">
-      <div id="messages" class="messages"></div>
-      <input type="text" id="userInput" placeholder="Frage eingeben..." />
-      <button onclick="sendMessage()">Senden</button>
-    </div>
-    <div class="tree-box">
-      <h2>Denkbaum</h2>
-      <svg id="tree"></svg>
-    </div>
+    <section id="konverter">
+      <h2>PNG ➝ OBJ ➝ X-File Konverter</h2>
+      <div class="uploader">
+        <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.obj">
+        <button onclick="simulateConversion()">Konvertieren</button>
+        <p id="conversionResult"></p>
+      </div>
+    </section>
+
+    <section id="showroom">
+      <h2>3D Objekt Showroom</h2>
+      <iframe src="https://3dviewer.net/" title="3D Viewer"></iframe>
+    </section>
   </div>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="tree-visualizer.js"></script>
-  <script src="script.js"></script>
+
+  <script>
+    function simulateConversion() {
+      const fileInput = document.getElementById('fileInput');
+      const result = document.getElementById('conversionResult');
+      if (fileInput.files.length === 0) {
+        result.textContent = 'Bitte eine Datei auswählen.';
+        return;
+      }
+      const fileName = fileInput.files[0].name;
+      result.textContent = `Datei "${fileName}" wurde erfolgreich konvertiert zu: theodor-von-haft.x`;
+    }
+  </script>
 </body>
 </html>

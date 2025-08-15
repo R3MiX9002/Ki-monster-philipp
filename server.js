@@ -1,24 +1,15 @@
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-const fs = require('fs');
+const { processMessage } = require('./services/logic-engine');
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
-app.use(express.static(__dirname + '/../'));
+app.use(express.json());
 
-app.post('/api/chat', (req, res) => {
-  const { message } = req.body;
-  const reply = `Antwort auf "${message}"`;
-  const thoughtTree = {
-    text: "Frage",
-    children: [
-      { text: message, children: [
-        { text: "Analyse", children: [{ text: "Antwort: " + reply }] }
-      ]}
-    ]
-  };
-  res.json({ reply, thoughtTree });
+app.post('/api/message', async (req, res) => {
+  const { message, gpt } = req.body;
+  const result = await processMessage(message, gpt);
+  res.json(result);
 });
 
-app.listen(3000, () => console.log("Server läuft auf http://localhost:3000"));
+app.listen(3000, () => console.log('KI-Monster Philipp läuft auf http://localhost:3000'));
