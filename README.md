@@ -3,7 +3,7 @@
 ## 📁 Vollständige Asset-Struktur
 
 ```
-Ki-monster-philipp/
+Erstelle Ki-monster-philipp/
 ├── assets/
 │   ├── icons/
 │   │   ├── favicon.ico                    # 🆕 Main Favicon
