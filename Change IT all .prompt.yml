@@ -6,4 +6,4 @@ messages:
       without money to uploaded for my Project. 
   - role: user
     content: 'Pull out the action items from this meeting transcript: {{input}}'
-model: openai/gpt-5-chat
+model: openai/gpt-4.1
